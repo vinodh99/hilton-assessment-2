@@ -1,31 +1,23 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-// import { Card, Row, Col, Input, Button } from "antd";
-// import { getUsers } from "./store/actions/yelpActions";
+import { Provider } from "react-redux";
+// Redux-persist delays the rendering of the app until the persisted dtate is retrived and stores the redux store to local storage so it is retained on refresh.
+import { PersistGate } from "redux-persist/integration/react";
+
+import configureStore from "./redux/store";
+import Rooms from "./components/rooms";
+//
+const { persistor, store } = configureStore();
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  // this.props.getData(this.state.value, 20, (this.state.n + 1) * 20 + 1, true);
-
   render() {
-    return <div>someting</div>;
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Rooms />
+        </PersistGate>
+      </Provider>
+    );
   }
 }
 
-const mapStateToProps = state => ({
-  // data: state.yelp.data
-});
-
-const mapDispatchToProps = dispatch => ({
-  // getData: (value, limit, offset, loadtype) =>
-  //   dispatch(getUsers(value, limit, offset, loadtype))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;

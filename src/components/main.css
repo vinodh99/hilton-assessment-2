@@ -1,0 +1,29 @@
+.checkbox:checked {
+  background-color: aqua !important;
+  color: burlywood !important;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 25px;
+}
+
+.submit {
+  margin-left: 25px;
+}
+
+.contentWrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.content {
+  margin: 0 10px;
+}
+
+.count {
+  width: 50px;
+  background-color: white;
+}
