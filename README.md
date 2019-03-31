@@ -7,4 +7,4 @@ Steps to run the app,
 5. Enter "y" and press enter if it asks to run the app on another port (It will ask you to run on different port if another application is running on port 3000 already).
 
 
-I could have programmed the application only using react and lifecycle components but to make things easy and understandable, I have used Redux.
+I could have written the application only using react and its lifecycle components but to make things easy and understandable, I have used Redux.
