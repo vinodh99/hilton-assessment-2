@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import "./main.css";
 import { save } from "../redux/reducer";
-import { Room, Header } from "./cards";
+import { AllRooms, RoomHeader } from "./cards";
 class Rooms extends Component {
   constructor(props) {
     super(props);
@@ -14,13 +14,13 @@ class Rooms extends Component {
 
   componentDidMount() {
     this.setState({
-      rooms: this.props.rooms
+      rooms: this.props.updated
     });
   }
 
   // setting the local state
 
-  countHandler = (e, i) => {
+  count = (e, i) => {
     let name = e.target.name;
     let updatedRooms = this.state.rooms.slice();
     updatedRooms[i][name] = +e.target.value;
@@ -29,7 +29,7 @@ class Rooms extends Component {
     });
   };
 
-  checkHandler = (i, e) => {
+  checkboxUpdate = (i, e) => {
     let updatedRooms = this.state.rooms.slice();
     updatedRooms[i].checked = e.target.checked;
     this.setState(
@@ -94,17 +94,17 @@ class Rooms extends Component {
     // rendering all the rooms by mapping from the state
     const rooms = this.state.rooms.map((room, i) => {
       return (
-        <Room key={i} active={room.checked}>
-          <Header active={room.checked} className="checkbox">
+        <AllRooms key={i} active={room.checked}>
+          <RoomHeader active={room.checked} className="checkbox">
             {i > 0 && (
               <input
                 type="checkbox"
                 checked={room.checked}
-                onChange={e => this.checkHandler(i, e)}
+                onChange={e => this.checkboxUpdate(i, e)}
               />
             )}
             <h3>{room.name}</h3>
-          </Header>
+          </RoomHeader>
           <div className="contentWrap">
             <div className="content">
               <p>Adults</p>
@@ -113,7 +113,7 @@ class Rooms extends Component {
                 name="adults"
                 value={room.adults}
                 disabled={!room.checked}
-                onChange={e => this.countHandler(e, i)}
+                onChange={e => this.count(e, i)}
               >
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -126,7 +126,7 @@ class Rooms extends Component {
                 name="children"
                 value={room.children}
                 disabled={!room.checked}
-                onChange={e => this.countHandler(e, i)}
+                onChange={e => this.count(e, i)}
               >
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -134,7 +134,7 @@ class Rooms extends Component {
               </select>
             </div>
           </div>
-        </Room>
+        </AllRooms>
       );
     });
 
@@ -150,7 +150,9 @@ class Rooms extends Component {
 }
 
 // mapping redux global state to local state
-const mapStateToProps = state => state;
+const mapStateToProps = state => ({
+  updated: state.rooms
+});
 export default connect(
   mapStateToProps,
   { save }

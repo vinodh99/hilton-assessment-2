@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Room = styled.div`
+export const AllRooms = styled.div`
   border-radius: 2px;
   height: 100px;
   width: 20%;
@@ -11,7 +11,7 @@ export const Room = styled.div`
   background-color: ${props => (props.active ? "#ace5f9" : "#DBDBE3")};
 `;
 
-export const Header = styled.div`
+export const RoomHeader = styled.div`
   display: flex;
   padding-left: 10px;
   line-height: 20px;
